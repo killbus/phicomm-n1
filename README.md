@@ -31,3 +31,29 @@ KERNEL_ONLY=no \
 KERNEL_CONFIGURE=no \
 COMPRESS_OUTPUTIMAGE=sha,img
 ```
+
+  
+
+
+## [User provided kernel config](https://docs.armbian.com/Developer-Guide_User-Configurations/#user-provided-kernel-config)  
+
+If file userpatches/sources/$LINUXFAMILY.conf exists, it will be used in addition to the default one from config/sources. Look for the hint at the beginning of compilation process to select proper config file name. Please note that there are some exceptions for LINUXFAMILY like sunxi (32-bit mainline sunxi) and sunxi64 (64-bit mainline sunxi)
+
+Example:
+
+`[ o.k. ] Adding user provided sunxi64 overrides`
+
+<pre><code><del>
+## Change the docker volume `armbian-cache` and `armbian-ccache` location
+
+As the cache may need a large space, you can change the volume manually.
+
+Just modify the file `userpatches/config-docker.conf`, and change the line
+
+example:
+
+```
+# mount 2 named volumes - for cacheable data and compiler cache
+DOCKER_FLAGS+=(-v=$SRC/cache:/root/armbian/cache -v=$SRC/ccache:/root/.ccache)
+```
+</del></code></pre>
